@@ -19,13 +19,21 @@ class Student(BaseModel):
     age = IntegerField()
 
 
+    
+class Teacher(BaseModel):
+    name = CharField()
+    subject = CharField()
+
+
 class Mark(BaseModel):
     student = ForeignKeyField(Student, backref='marks')
     value = IntegerField()
     timestamp = DateTimeField(default=datetime.now)
+    teacher = ForeignKeyField(Teacher, backref='marks')
+
 
 
 if __name__ == "__main__":
     db.connect()
-    db.create_tables([Student, Mark])
+    db.create_tables([Student, Mark, Teacher])
     db.close()

@@ -45,3 +45,20 @@ def validate_mark_data(data):
 
     data["student"] = student
     return data
+
+
+def validate_teacher_data(data):
+    name = data.get("name")
+    subject = data.get("subject")
+
+    if not (name and subject):
+        raise ValidationError("name and subject are required")
+
+    if not isinstance(subject, str):
+        raise ValidationError("subject must be string")
+    if not isinstance(name, str):
+        raise ValidationError("name must be string")
+
+
+    if name == "":
+        raise ValidationError("name must not be empty")
